@@ -1,0 +1,32 @@
+[project]
+name = "odd-lot-arb"
+version = "0.1.0"
+description = "Odd Lot Arbitrage Opportunity Finder — EDGAR Filing Scanner"
+requires-python = ">=3.11"
+dependencies = [
+    "httpx>=0.27.0",
+    "beautifulsoup4>=4.12.0",
+    "lxml>=5.3.0",
+    "yfinance>=0.2.50",
+    "pydantic>=2.5.0",
+    "pyfiglet>=1.0.2",
+    # Windows doesn't ship curses — this package backfills it.
+    # On Mac/Linux curses is already in the stdlib, so this is a no-op there.
+    "windows-curses>=2.3.3; sys_platform == 'win32'",
+]
+
+[project.scripts]
+oddlot = "odd_lot_arb.__main__:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/odd_lot_arb"]
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=8.0",
+    "ruff>=0.4",
+]
